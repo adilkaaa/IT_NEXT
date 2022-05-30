@@ -55,3 +55,29 @@ class SearchResultsView(ListView):
         if list(object_list) == []:
             object_list = 0
         return object_list
+
+
+def blog_grid(request):
+    blogs = Blog.objects.all()
+    blog_paginator = Paginator(blogs, 3)
+    page_num = request.GET.get('page')
+    page = blog_paginator.get_page(page_num)
+    context = {
+        'page': page,
+        'count': blog_paginator.count
+    }
+    return render(request, 'it_blog_grid.html', context=context)
+
+
+def service(request):
+    services = Service.objects.all()
+    staff = Staff.objects.all()[:4]
+    context = {
+        'services': services,
+        'staff': staff
+    }
+    return render(request, 'it_service.html', context=context)
+
+
+
+

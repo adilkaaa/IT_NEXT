@@ -10,6 +10,9 @@ urlpatterns = [
     path('it_shop/', product_list, name='it_shop'),
     path('about/', about, name='about'),
     path('blog_list/',blog_list, name='blog_list'),
-    path('search/',SearchResultsView.as_view(),name = 'search')
+    path('search/',SearchResultsView.as_view(),name = 'search'),
+    path('blog_grid/', blog_grid, name ='blog_grid'),
+    path('service/', service, name = 'service'),
+    # path('service_list/', )
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
