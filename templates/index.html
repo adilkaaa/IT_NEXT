@@ -566,8 +566,10 @@
             <h4>{{b.title}}</h4>
           </div>
           <div class="blog_feature_cont">
-            <p>{{b.content}}</p>
+            <p>{{b.content|truncatechars:80}}</p>
           </div>
+          <div class="bt_cont"> <a class="btn sqaure_bt" href="/blogs/{{s.id}}">Read More</a> </div>
+
         </div>
       </div>
       {%endfor%}
