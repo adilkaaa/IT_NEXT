@@ -1,29 +1,40 @@
 from django.shortcuts import render
+
+from .forms import EmailForm
 from .models import *
 # Create your views here.
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView
 from django.core.paginator import Paginator
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.detail import DetailView
+
 
 
 def index(request):
     ads = Advert.objects.all()
     products = Product.objects.all()
-
+    blogs = Blog.objects.all()[::-1][:3]
+    if request.method == 'POST':
+        if 'email' in request.POST:
+            form = EmailForm(request.POST)
+            mail = request.POST['mail']
     context = {
         'ads': ads,
-        'products': products
+        'products': products,
+        'blogs':blogs
     }
     return render(request, 'index.html', context= context)
 
 
-def product_list(request):
-    products = Product.objects.all()
-    context = {
-        'products': products
-    }
-    return render(request, 'it_shop.html', context=context)
+class Product_list(ListView):
+    model = Product
+    template_name = 'it_shop.html'
+    context_object_name = 'products'
 
+
+class Product_Detail(DetailView):
+    ...
 
 def about(request):
     staff = Staff.objects.all()[:4]
@@ -31,6 +42,7 @@ def about(request):
         'staff': staff
     }
     return render(request, 'it_about.html', context=context)
+
 
 def blog_list(request):
     blogs = Blog.objects.all()[::-1]#[:3]

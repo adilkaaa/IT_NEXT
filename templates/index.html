@@ -553,49 +553,26 @@
         </div>
       </div>
     </div>
+
     <div class="row">
+      {%for b in blogs%}
       <div class="col-md-4">
         <div class="full blog_colum">
-          <div class="blog_feature_img"> <img src="images/it_service/post-03.jpg" alt="#" /> </div>
+          <div class="blog_feature_img"> <img src="{{b.image.url}}" alt="#" /> </div>
           <div class="post_time">
-            <p><i class="fa fa-clock-o"></i> April 16, 2018 ( In Maintenance )</p>
+            <p><i class="fa fa-clock-o"></i> {{b.date}}</p>
           </div>
           <div class="blog_feature_head">
-            <h4>Why Your Computer Hates You</h4>
+            <h4>{{b.title}}</h4>
           </div>
           <div class="blog_feature_cont">
-            <p>Lorem ipsum dolor sit amet, consectetur quam justo, pretium adipiscing elit. Vestibulum quam justo, pretium eu tempus ut, ...</p>
+            <p>{{b.content}}</p>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="full blog_colum">
-          <div class="blog_feature_img"> <img src="images/it_service/post-04.jpg" alt="#" /> </div>
-          <div class="post_time">
-            <p><i class="fa fa-clock-o"></i> April 16, 2018 ( In Maintenance )</p>
-          </div>
-          <div class="blog_feature_head">
-            <h4>Easy Tips To Computer Repair</h4>
-          </div>
-          <div class="blog_feature_cont">
-            <p>Lorem ipsum dolor sit amet, consectetur quam justo, pretium adipiscing elit. Vestibulum quam justo, pretium eu tempus ut, ...</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="full blog_colum">
-          <div class="blog_feature_img"> <img src="images/it_service/post-06.jpg" alt="#" /> </div>
-          <div class="post_time">
-            <p><i class="fa fa-clock-o"></i> April 16, 2018 ( In Maintenance )</p>
-          </div>
-          <div class="blog_feature_head">
-            <h4>Computer Maintenance 2018</h4>
-          </div>
-          <div class="blog_feature_cont">
-            <p>Lorem ipsum dolor sit amet, consectetur quam justo, pretium adipiscing elit. Vestibulum quam justo, pretium eu tempus ut, ...</p>
-          </div>
-        </div>
-      </div>
+      {%endfor%}
+
+
     </div>
   </div>
 </div>

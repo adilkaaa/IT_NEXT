@@ -87,3 +87,10 @@ class PostComment(models.Model):
     def __str__(self):
         return self.email
 
+
+class Email(models.Model):
+    email = models.EmailField(blank=True)
+
+    def __str__(self):
+        return self.email
+
