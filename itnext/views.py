@@ -19,6 +19,7 @@ def index(request):
         if 'email' in request.POST:
             form = EmailForm(request.POST)
             mail = request.POST['mail']
+
     context = {
         'ads': ads,
         'products': products,
@@ -96,6 +97,15 @@ def service(request):
         'staff': staff
     }
     return render(request, 'it_service.html', context=context)
+
+
+class ServiceDetail(DetailView):
+    staff = Staff.objects.all()[:3]
+    model = Service
+    context_object_name = 'service'
+    template_name = 'it_service_detail.html'
+    extra_context = {'staff':staff}
+
 
 
 
