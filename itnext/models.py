@@ -63,6 +63,7 @@ class Service(models.Model):
     image = models.ImageField(upload_to='image/services/')
     name = models.CharField(max_length=50, blank=True)
     description = models.TextField(blank=True)
+    orders = models.IntegerField(default=0,verbose_name='order')
 
     def __str__(self):
         return self.name
@@ -116,5 +117,11 @@ class Email(models.Model):
         return self.email
 
 
-
+class Data(models.Model):
+    CHOICES = [('Happy Customers','Happy Customers'),('Repaired Laptops','Repaired Laptops'),('Repaired Computers','Repaired Computers'),('OS INSTALLED','OS INSTALLED')]
+    name = models.CharField(blank=True, max_length=100, choices=CHOICES)
+    quantity = models.IntegerField(blank=True)
+    logo = models.FileField(upload_to='logo/')
+    def __str__(self):
+        return self.name
 

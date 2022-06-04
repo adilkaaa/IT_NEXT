@@ -14,7 +14,10 @@ from django.views.generic.detail import DetailView
 def index(request):
     ads = Advert.objects.all()
     products = Product.objects.all()
-    blogs = Blog.objects.all()[::-1][:3]
+    blogs = Blog.objects.filter().order_by('-views')[:3]
+    data = Data.objects.all()
+    services = Service.objects.filter().order_by('-orders')[:3]
+
     if request.method == 'POST':
         if 'email' in request.POST:
             form = EmailForm(request.POST)
@@ -23,9 +26,11 @@ def index(request):
     context = {
         'ads': ads,
         'products': products,
-        'blogs':blogs
+        'blogs':blogs,
+        'data': data,
+        'services':services
     }
-    return render(request, 'index.html', context= context)
+    return render(request, 'index.html', context=context)
 
 
 class Product_list(ListView):
@@ -90,7 +95,7 @@ def blog_grid(request):
 
 
 def service(request):
-    services = Service.objects.all()
+    services = Service.objects.filter().order_by('-orders')[:3]
     staff = Staff.objects.all()[:4]
     context = {
         'services': services,
@@ -98,6 +103,10 @@ def service(request):
     }
     return render(request, 'it_service.html', context=context)
 
+class ServiceList(ListView):
+    model = Service
+    template_name = 'it_service_list.html'
+    context_object_name = 'service'
 
 class ServiceDetail(DetailView):
     staff = Staff.objects.all()[:3]

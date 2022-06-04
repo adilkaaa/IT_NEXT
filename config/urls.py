@@ -15,7 +15,8 @@ urlpatterns = [
     path('search/',SearchResultsView.as_view(),name = 'search'),
     path('blog_grid/', blog_grid, name ='blog_grid'),
     path('service/', service, name = 'service'),
-    path('service/<int:pk>/', ServiceDetail.as_view(),name='service_detail')
+    path('service/<int:pk>/', ServiceDetail.as_view(),name='service_detail'),
+    path('service_list/',ServiceList.as_view(),name='service_list')
     # path('service_list/', )
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

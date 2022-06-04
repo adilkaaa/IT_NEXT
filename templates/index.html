@@ -266,42 +266,26 @@
       </div>
     </div>
     <div class="row">
+      {%for s in services%}
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
         <div class="full text_align_center margin_bottom_30">
           <div class="center">
-            <div class="icon"> <img src="{% static 'images/it_service/i1.png'%}" alt="#" /> </div>
+            <div class="icon"> <img src="{{s.image.url}}" alt="#" /> </div>
           </div>
-          <h4 class="theme_color">Data recovery</h4>
-          <p>Perspiciatis eos quos totam cum minima aut!</p>
+          <h4 class="theme_color">{{s.name}}</h4>
+          <p><span><b>Orders: {{s.orders}}</b></span> <br>{{s.description|truncatechars:40}}</p>
+          <div class="bt_cont"> <a class="btn sqaure_bt" href="/service/{{s.id}}">View Service</a> </div>
+
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="full text_align_center margin_bottom_30">
-          <div class="center">
-            <div class="icon"> <img src="{% static 'images/it_service/i2.png'%}" alt="#" /> </div>
-          </div>
-          <h4 class="theme_color">Computer repair</h4>
-          <p>Perspiciatis eos quos totam cum minima aut!</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="full text_align_center margin_bottom_30">
-          <div class="center">
-            <div class="icon"> <img src="{% static 'images/it_service/i3.png'%}" alt="#" /> </div>
-          </div>
-          <h4 class="theme_color">Mobile service</h4>
-          <p>Perspiciatis eos quos totam cum minima aut!</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="full text_align_center margin_bottom_30 margin_0">
-          <div class="center">
-            <div class="icon"> <img src="{% static 'images/it_service/i4.png'%}" alt="#" /> </div>
-          </div>
-          <h4 class="theme_color">Network solutions</h4>
-          <p>Perspiciatis eos quos totam cum minima aut!</p>
-        </div>
-      </div>
+      {%endfor%}
+
+
+
+
+
+
+
     </div>
     <div class="row" style="margin-top: 35px">
       <div class="col-md-8">
@@ -471,7 +455,7 @@
           <div class="product_img"> <img class="img-responsive" src="{{p.image.url}}" alt=""> </div>
           <div class="product_detail_btm">
             <div class="center">
-              <h4><a href="it_shop_detail.html">{{p.name}}</a></h4>
+              <h4><a href="/products/{{p.id}}">{{p.name}}</a></h4>
             </div>
             <div class="starratin">
               <div class="center"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
@@ -507,34 +491,18 @@
       <div class="col-md-4"> </div>
       <div class="col-md-8">
         <div class="row">
+          {%for d in data%}
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 margin_bottom_50">
-            <div class="text_align_right"><i class="fa fa-smile-o"></i></div>
+            <div class="text_align_right"><img src="{{d.logo.url}}" alt="logo"></div>
             <div class="text_align_right">
-              <p class="counter-heading text_align_right">Happy Customers</p>
+              <p class="counter-heading text_align_right">{{d.name}}</p>
             </div>
-            <h5 class="counter-count">2150</h5>
+            <h5 class="counter-count">{{d.quantity}}</h5>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 margin_bottom_50">
-            <div class="text_align_right"><i class="fa fa-laptop"></i></div>
-            <div class="text_align_right">
-              <p class="counter-heading text_align_right">Laptop Repaired</p>
-            </div>
-            <h5 class="counter-count">1280</h5>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 margin_bottom_50">
-            <div class="text_align_right"><i class="fa fa-desktop"></i></div>
-            <div class="text_align_right">
-              <p class="counter-heading">Computer Repaired</p>
-            </div>
-            <h5 class="counter-count">848</h5>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 margin_bottom_50">
-            <div class="text_align_right"><i class="fa fa-windows"></i></div>
-            <div class="text_align_right">
-              <p class="counter-heading">OS Installed</p>
-            </div>
-            <h5 class="counter-count">450</h5>
-          </div>
+          {% endfor %}
+
+
+
         </div>
       </div>
     </div>
@@ -548,7 +516,7 @@
       <div class="col-md-12">
         <div class="full">
           <div class="main_heading text_align_left">
-            <h2>Latest from Our Blog</h2>
+            <h2>Most Popular From Our Blog</h2>
           </div>
         </div>
       </div>
@@ -560,7 +528,7 @@
         <div class="full blog_colum">
           <div class="blog_feature_img"> <img src="{{b.image.url}}" alt="#" /> </div>
           <div class="post_time">
-            <p><i class="fa fa-clock-o"></i> {{b.date}}</p>
+            <p><i class="fa fa-clock-o"></i> {{b.date}}<br><span>&#128065;</span>{{b.views}}</p>
           </div>
           <div class="blog_feature_head">
             <h4>{{b.title}}</h4>
@@ -568,7 +536,7 @@
           <div class="blog_feature_cont">
             <p>{{b.content|truncatechars:80}}</p>
           </div>
-          <div class="bt_cont"> <a class="btn sqaure_bt" href="/blogs/{{s.id}}">Read More</a> </div>
+          <div class="bt_cont"> <a class="btn sqaure_bt" href="/blogs/{{b.id}}">Read More</a> </div>
 
         </div>
       </div>
