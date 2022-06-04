@@ -34,7 +34,9 @@ class Product_list(ListView):
 
 
 class Product_Detail(DetailView):
-    ...
+    model = Product
+    template_name = 'it_shop_detail.html'
+
 
 def about(request):
     staff = Staff.objects.all()[:4]
@@ -54,6 +56,11 @@ def blog_list(request):
         'count':blog_paginator.count
     }
     return render(request, 'it_blog.html', context=context)
+
+class BlogDetail(DetailView):
+    model = Blog
+    template_name = 'it_blog_detail.html'
+    context_object_name = 'blog'
 
 
 class SearchResultsView(ListView):

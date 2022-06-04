@@ -41,9 +41,9 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> {{blog.date}}</li>
                 </ul>
               </div>
-              <p>{{blog.content}} </p>
+              <p>{{blog.content|truncatechars:70}} </p>
               <div class="bottom_info">
-                <div class="pull-left"><a class="btn sqaure_bt" href="it_blog_detail.html">Read More<i class="fa fa-angle-right"></i></a></div>
+                <div class="pull-left"><a class="btn sqaure_bt" href="{{blog.id}}">Read More<i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">
                   <div class="shr">Share: </div>
                   <div class="social_icon">

@@ -2,6 +2,7 @@ from django.db import models
 
 
 # Create your models here.
+from django.urls import reverse
 
 
 class Blog(models.Model):
@@ -27,6 +28,8 @@ class Product(models.Model):
     description = models.TextField(blank=True)
 
     # review = models.ManyToOneRel()
+    def get_absolute_url(self):
+        return self.pk#"", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
