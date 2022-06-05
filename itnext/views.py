@@ -45,12 +45,14 @@ class Index(LoginRequiredMixin, ListView):
     blogs = Blog.objects.filter().order_by('-views')[:3]
     # data = Data.objects.all()
     services = Service.objects.filter().order_by('-orders')[:3]
+    service = Service.objects.all()
     extra_context = {
         'ads': ads,
         'products': products,
         'blogs': blogs,
         # 'data': data,
-        'services': services
+        'services': services,
+        'service':service
     }
 
 
@@ -159,6 +161,48 @@ class ServiceDetail(DetailView):
     context_object_name = 'service'
     template_name = 'it_service_detail.html'
     extra_context = {'staff':staff}
+
+
+def error(request):
+    return render(request, 'it_error.html')
+
+
+def faq(request):
+    staff = Staff.objects.all()[:3]
+    context = {
+        'staff': staff
+    }
+    return render(request, 'it_faq.html', context=context)
+
+
+def privacy(request):
+    return render(request, 'it_privacy_policy.html')
+
+
+class BlogView(ListView):
+    model = Blog
+    template_name = 'blog_by_tag.html'
+    context_object_name = 'blogs'
+
+
+    def get_queryset(self):
+        qs = super(BlogView,self).get_queryset()
+        # qs.filter(tags__id=int(self.kwargs['tag_id']))
+        # return qs
+        return qs.filter(tags__id=int(self.kwargs['tag_id']))
+
+
+class CategoryView(ListView):
+    model = Blog
+    template_name = 'blog_by_category.html'
+    context_object_name = 'blogs'
+
+    def get_queryset(self):
+        qs = super(CategoryView, self).get_queryset()
+        # qs.filter(tags__id=int(self.kwargs['tag_id']))
+        # return qs
+        return qs.filter(category__id=int(self.kwargs['category_id']))
+
 
 
 

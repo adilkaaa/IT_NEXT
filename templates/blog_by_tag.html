@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="section padding_layout_1 service_list">
+  <div class="container">
+    <div class="row">
+      {%for blog in blogs%}
+      <div class="col-md-4 service_blog margin_bottom_50">
+        <div class="full">
+          <div class="service_img"> <img class="img-responsive" src="{{blog.image.url}}" alt="#" /> </div>
+          <div class="service_cont">
+            <h3 class="service_head">{{blog.name}}</h3>
+            <p>{{blog.content|truncatechars:40}}</p>
+            <div class="bt_cont"> <a class="btn sqaure_bt" href="/blogs/{{blog.id}}">Read More</a> </div>
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+<!--      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left">-->
+<!--        <div class="side_bar">-->
+<!--          <div class="side_bar_blog">-->
+<!--            <h4>TAG</h4>-->
+<!--            <div class="tags">-->
+<!--              <ul>-->
+<!--                {%for t in blogs.tag.all%}-->
+<!--                <li><a href="#">{{t}}</a></li>-->
+<!--                {%endfor%}-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{%endblock%}

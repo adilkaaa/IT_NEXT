@@ -19,7 +19,12 @@ urlpatterns = [
     path('service_list/',ServiceList.as_view(),name='service_list'),
     path('login/',CustomLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
-    path('register/', RegisterPage.as_view(), name='register')
-    # path('service_list/', )
-]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('register/', RegisterPage.as_view(), name='register'),
+    path('error_page/', error, name='error'),
+    path('fag/', faq, name='faq'),
+    path('privacy/', privacy, name='privacy'),
+    path('tag/<int:tag_id>/', BlogView.as_view(), name='tag'),
+    path('category/<int:category_id>/', CategoryView.as_view(), name='category')
+
+              ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
