@@ -53,7 +53,7 @@ class Product(models.Model):
 
     # review = models.ManyToOneRel()
     def get_absolute_url(self):
-        return self.pk#"", kwargs={"pk": self.pk})
+        return self.pk #"", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name

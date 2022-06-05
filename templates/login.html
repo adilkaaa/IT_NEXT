@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+	<link rel="stylesheet" href="{% static 'css/login.css'%}" />
+</head>
+<body>
+
+<!--<h1><b>Login</b></h1>-->
+
+<!--<form method="POST">-->
+<!--  {%csrf_token%}-->
+<!--  {{form.as_p}}-->
+<!--  <input class='button' value="login" type="submit">-->
+<!--</form>-->
+
+<!--<div class="container" id="container">-->
+<!--	<div class="form-container sign-up-container">-->
+<!--		<form method="POST">-->
+<!--			{%csrf_token%}-->
+<!--			<h1>Create Account</h1>-->
+
+<!--&lt;!&ndash;			<input type="text" placeholder="Name" />&ndash;&gt;-->
+<!--&lt;!&ndash;			{{form.username}}&ndash;&gt;-->
+<!--&lt;!&ndash;			<input type="email" placeholder="Email" />&ndash;&gt;-->
+<!--&lt;!&ndash;			{{form.password}}&ndash;&gt;-->
+<!--&lt;!&ndash;			<input type="password" placeholder="Password" />&ndash;&gt;-->
+<!--			<button>Sign Up</button>-->
+<!--		</form>-->
+<!--	</div>-->
+	<div class="form-container sign-in-container">
+		<form method="POST">
+			{%csrf_token%}
+			<h1>Login</h1>
+			{{form.as_p}}
+			<input class='button' value="login" type="submit">
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Don't have an account? Create it!</p>
+				<button><a href="{% url 'register' %}">Register</a></button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{% static 'js/login.js' %}"></script>
+
+
+</body>
+</html>

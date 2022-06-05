@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 
 from .forms import EmailForm
 from .models import *
@@ -8,10 +9,54 @@ from django.views.generic import TemplateView, ListView
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.detail import DetailView
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormView
+from django.contrib.auth import login
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+    fields = '__all__'
+    redirect_authenticated_user = True
 
 
+    def get_success_url(self):
+        return reverse_lazy('index')
 
+class RegisterPage(FormView):
+    template_name = 'register.html'
+    form_class = UserCreationForm
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        user = form.save()
+        if user is not None:
+            login(self.request, user)
+        return super(RegisterPage, self).form_valid(form)
+
+
+class Index(LoginRequiredMixin, ListView):
+    model = Data
+    template_name = 'index.html'
+    context_object_name = 'data'
+    ads = Advert.objects.all()
+    products = Product.objects.all()
+    blogs = Blog.objects.filter().order_by('-views')[:3]
+    # data = Data.objects.all()
+    services = Service.objects.filter().order_by('-orders')[:3]
+    extra_context = {
+        'ads': ads,
+        'products': products,
+        'blogs': blogs,
+        # 'data': data,
+        'services': services
+    }
+
+
+    pass
 def index(request):
+
     ads = Advert.objects.all()
     products = Product.objects.all()
     blogs = Blog.objects.filter().order_by('-views')[:3]
@@ -33,7 +78,7 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-class Product_list(ListView):
+class Product_list(LoginRequiredMixin,ListView):
     model = Product
     template_name = 'it_shop.html'
     context_object_name = 'products'
@@ -103,7 +148,7 @@ def service(request):
     }
     return render(request, 'it_service.html', context=context)
 
-class ServiceList(ListView):
+class ServiceList(LoginRequiredMixin,ListView):
     model = Service
     template_name = 'it_service_list.html'
     context_object_name = 'service'
