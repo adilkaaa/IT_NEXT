@@ -57,27 +57,27 @@ class Index(LoginRequiredMixin, ListView):
 
 
     pass
-def index(request):
-
-    ads = Advert.objects.all()
-    products = Product.objects.all()
-    blogs = Blog.objects.filter().order_by('-views')[:3]
-    data = Data.objects.all()
-    services = Service.objects.filter().order_by('-orders')[:3]
-
-    if request.method == 'POST':
-        if 'email' in request.POST:
-            form = EmailForm(request.POST)
-            mail = request.POST['mail']
-
-    context = {
-        'ads': ads,
-        'products': products,
-        'blogs':blogs,
-        'data': data,
-        'services':services
-    }
-    return render(request, 'index.html', context=context)
+# def index(request):
+#
+#     ads = Advert.objects.all()
+#     products = Product.objects.all()
+#     blogs = Blog.objects.filter().order_by('-views')[:3]
+#     data = Data.objects.all()
+#     services = Service.objects.filter().order_by('-orders')[:3]
+#
+#     if request.method == 'POST':
+#         if 'email' in request.POST:
+#             form = EmailForm(request.POST)
+#             mail = request.POST['mail']
+#
+#     context = {
+#         'ads': ads,
+#         'products': products,
+#         'blogs':blogs,
+#         'data': data,
+#         'services':services
+#     }
+#     return render(request, 'index.html', context=context)
 
 
 class Product_list(LoginRequiredMixin,ListView):
@@ -86,7 +86,7 @@ class Product_list(LoginRequiredMixin,ListView):
     context_object_name = 'products'
 
 
-class Product_Detail(DetailView):
+class Product_Detail(LoginRequiredMixin,DetailView):
     model = Product
     template_name = 'it_shop_detail.html'
 
@@ -110,13 +110,13 @@ def blog_list(request):
     }
     return render(request, 'it_blog.html', context=context)
 
-class BlogDetail(DetailView):
+class BlogDetail(LoginRequiredMixin,DetailView):
     model = Blog
     template_name = 'it_blog_detail.html'
     context_object_name = 'blog'
 
 
-class SearchResultsView(ListView):
+class SearchResultsView(LoginRequiredMixin,ListView):
     model = Blog
     template_name = 'search.html'
 

@@ -760,7 +760,7 @@ hr.dottad_border {
 }
 
 .blog_feature_img img {
-	width: 100%;
+	width: auto;
 }
 
 .main_heading {
