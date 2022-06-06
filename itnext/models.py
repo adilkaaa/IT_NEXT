@@ -103,7 +103,7 @@ class Advert(models.Model):
 class PostComment(models.Model):
     email = models.EmailField(blank=True)
     phone = models.CharField(max_length=10, blank=True)
-    password = models.CharField(max_length=30, blank=True)
+    # password = models.CharField(max_length=30, blank=True)
     comment = models.TextField(blank=True)
 
     def __str__(self):

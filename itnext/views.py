@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
-from .forms import EmailForm
+from .forms import EmailForm, PostCommentForm
 from .models import *
 # Create your views here.
 from django.db.models import Q
@@ -13,6 +13,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView
 from django.contrib.auth import login
+from django.views.generic.edit import FormMixin
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
@@ -56,7 +57,7 @@ class Index(LoginRequiredMixin, ListView):
     }
 
 
-    pass
+
 # def index(request):
 #
 #     ads = Advert.objects.all()
@@ -110,10 +111,37 @@ def blog_list(request):
     }
     return render(request, 'it_blog.html', context=context)
 
-class BlogDetail(LoginRequiredMixin,DetailView):
+class BlogDetail(LoginRequiredMixin,FormMixin,DetailView):
     model = Blog
     template_name = 'it_blog_detail.html'
     context_object_name = 'blog'
+    # def add_comment_to_post(self):
+    #     if self.method == 'POST':
+    #         form = PostCommentForm(self.POST)
+    #         if form.is_valid():
+    #             form.save()
+    #             return redirect('/')
+    form_class = PostCommentForm
+
+    def get_success_url(self):
+        return reverse('blog', kwargs={'pk': self.object.id})
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogDetail, self).get_context_data(**kwargs)
+        context['form'] = PostCommentForm(initial={'post': self.object})
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        return super(BlogDetail, self).form_valid(form)
 
 
 class SearchResultsView(LoginRequiredMixin,ListView):

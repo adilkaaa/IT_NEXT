@@ -63,19 +63,9 @@
             <div class="view_commant">
 
               <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                  <div class="full"> <img class="img-responsive" style="max-width:100px" src="images/it_service/client1.png" alt="#"> </div>
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
-                  <div class="full theme_bg white_fonts command_cont">
-                    <p class="comm_head">Christian Perez <span>April 27,2018</span><a class="rply" href="it_blog_detail.html">Reply</a></p>
-                    <p>magine you are 10 years into the future but this time it’s different. Why? Because starting today you actually 
-                      begin making changes in your life. Specific intentional changes are not easy. They are intentional because these 
-                      changes are changes that you are choosing and they are the changes that will cause you to live the life you want 
-                      to live and dream. </p>
-                  </div>
 
                   <div class="full">
+
                     <div class="row">
                       <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
                         <div class="full"> <img class="img-responsive" style="max-width:100px" src="images/it_service/client2.png" alt="#"> </div>
@@ -90,56 +80,32 @@
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                        <div class="full"> <img class="img-responsive" style="max-width:100px" src="images/it_service/client3.png" alt="#"> </div>
-                      </div>
-                      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
-                        <div class="full command_cont">
-                          <p class="comm_head">Christian Perez <span>April 27,2018</span><a class="rply" href="it_blog_detail.html">Reply</a></p>
-                          <p>magine you are 10 years into the future but this time it’s different. Why? Because starting today you actually 
-                            begin making changes in your life. Specific intentional changes are not easy. They are 
-                            intentional because these changes are changes. </p>
-                        </div>
-                      </div>
-                    </div>
                   </div>
 
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                  <div class="full"> <img class="img-responsive" style="max-width:100px" src="images/it_service/client1.png" alt="#"> </div>
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
-                  <div class="full theme_bg white_fonts command_cont">
-                    <p class="comm_head">Christian Perez <span>Sep 27,2017</span><a class="rply" href="it_blog_detail.html">Reply</a></p>
-                    <p>magine you are 10 years into the future but this time it’s different. Why? Because starting today you actually 
-                      begin making changes in your life. Specific intentional changes are not easy. They are intentional because these 
-                      changes are changes that you are choosing and they are the changes that will cause you to live the life you want 
-                      to live and dream. </p>
-                  </div>
-                </div>
-              </div>
-
             </div>
             <div class="post_commt_form">
               <h4>POST YOUR COMMENT</h4>
-              <div class="form_section">
-                <form class="form_contant" action="index.html">
+              <div class="form_section" >
+                <form class="form_contant" method="POST" action="/blogs/{{blog.id}}/">
+                  {%csrf_token%}
                   <fieldset class="row">
                   <div class="field col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <input class="field_custom" placeholder="Email" type="email" required>
+<!--                    <input class="field_custom" placeholder="Email" type="email" required>-->
+                    {{form.email}}
                   </div>
                   <div class="field col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <input class="field_custom" placeholder="Phone" type="text" required>
+<!--                 <input class="field_custom" placeholder="Phone" type="text" required>-->
+                    {{form.phone}}
                   </div>
-                  <div class="field col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <input class="field_custom" placeholder="Password" type="password" required>
-                  </div>
+<!--                  <div class="field col-lg-4 col-md-4 col-sm-6 col-xs-12">-->
+<!--&lt;!&ndash;                    <input class="field_custom" placeholder="Password" type="password" required>-->
+<!--     &ndash;&gt;            {{form.password}}-->
+<!--                  </div>-->
                   <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <textarea class="field_custom" placeholder="Comment" required></textarea>
+<!--                    <textarea class="field_custom" placeholder="Comment" required></textarea>-->
+                    {{form.comment}}
                   </div>
                   <div class="center">
                     <button class="btn main_bt">SUBMIT NOW</button>
@@ -147,6 +113,7 @@
                   </fieldset>
                 </form>
               </div>
+
             </div>
           </div>
         </div>
