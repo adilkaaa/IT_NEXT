@@ -46,31 +46,33 @@
   <div class="header_top">
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
-          <div class="full">
-            <div class="topbar-left">
-              <ul class="list-inline">
-                <li> <span class="topbar-label"><i class="fa  fa-home"></i></span> <span class="topbar-hightlight">540 Lorem Ipsum New York, AB 90218</span> </li>
-                <li> <span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight"><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></span> </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+<!--        <div class="col-md-8">-->
+<!--          <div class="full">-->
+<!--            <div class="topbar-left">-->
+<!--              <ul class="list-inline">-->
+<!--                <li> <span class="topbar-label"><i class="fa  fa-home"></i></span> <span class="topbar-hightlight">540 Lorem Ipsum New York, AB 90218</span> </li>-->
+<!--                <li> <span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight"><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></span> </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="col-md-4 right_section_header_top">
           <div class="float-left">
             <div class="social_icon">
               <ul class="list-inline">
-                <li><a class="fa fa-facebook" href="https://www.facebook.com/" title="Facebook" target="_blank"></a></li>
-                <li><a class="fa fa-google-plus" href="https://plus.google.com/" title="Google+" target="_blank"></a></li>
-                <li><a class="fa fa-twitter" href="https://twitter.com" title="Twitter" target="_blank"></a></li>
-                <li><a class="fa fa-linkedin" href="https://www.linkedin.com" title="LinkedIn" target="_blank"></a></li>
-                <li><a class="fa fa-instagram" href="https://www.instagram.com" title="Instagram" target="_blank"></a></li>
+                 {% if request.user.is_authenticated %}
+                <li><b>{{request.user}}</b></li>
+                <li><a class ='fa' href="{%url 'logout'%}">Logout</a></li>
+                {%else%}
+                <li><a href="{%url 'login' %}">Login</a></li>
+                {%endif%}
               </ul>
             </div>
           </div>
           <div class="float-right">
             <div class="make_appo"> <a class="btn white_btn" href="make_appointment.html">Make Appointment</a> </div>
+
           </div>
         </div>
       </div>
@@ -94,44 +96,44 @@
                 <li> <a class="active" href="{%url 'index'%}">Home</a>
                   <ul>
                     <li><a href="{%url 'index'%}">It Home Page</a></li>
-                    <li><a href="it_home_dark.html">It Dark Home Page</a></li>
+<!--                    <li><a href="it_home_dark.html">It Dark Home Page</a></li>-->
                   </ul>
                 </li>
                 <li><a href="{%url 'about' %}">About Us</a></li>
                 <li> <a href="{%url 'service'%}">Service</a>
                   <ul>
-                    <li><a href="{%url 'service'%}">Services list</a></li>
-                    <li><a href="it_service_detail.html">Services Detail</a></li>
+                    <li><a href="{%url 'service_list'%}">Services list</a></li>
+<!--                    <li><a href="it_service_detail.html">Services Detail</a></li>-->
                   </ul>
                 </li>
                 <li> <a href="{%url 'blog_list'%}">Blog</a>
                   <ul>
                     <li><a href="{%url 'blog_list'%}">Blog List</a></li>
                     <li><a href="{%url 'blog_grid'%}">Blog Grid</a></li>
-                    <li><a href="it_blog_detail.html">Blog Detail</a></li>
+<!--                    <li><a href="it_blog_detail.html">Blog Detail</a></li>-->
                   </ul>
                 </li>
                 <li> <a href="#">Pages</a>
                   <ul>
-                    <li><a href="it_career.html">Career</a></li>
-                    <li><a href="it_price.html">Pricing</a></li>
-                    <li><a href="it_faq.html">Faq</a></li>
-                    <li><a href="it_privacy_policy.html">Privacy Policy</a></li>
-                    <li><a href="it_error.html">Error 404</a></li>
+<!--                    <li><a href="it_career.html">Career</a></li>-->
+<!--                    <li><a href="it_price.html">Pricing</a></li>-->
+                    <li><a href="{% url 'faq'%}">Faq</a></li>
+                    <li><a href="{% url 'privacy'%}">Privacy Policy</a></li>
+                    <li><a href="{%url 'error' %}">Error 404</a></li>
                   </ul>
                 </li>
                 <li> <a href="{% url 'it_shop'%}">Shop</a>
                   <ul>
                     <li><a href="{% url 'it_shop'%}">Shop List</a></li>
-                    <li><a href="it_shop_detail.html">Shop Detail</a></li>
-                    <li><a href="it_cart.html">Shopping Cart</a></li>
-                    <li><a href="it_checkout.html">Checkout</a></li>
+
+<!--                    <li><a href="it_cart.html">Shopping Cart</a></li>-->
+<!--                    <li><a href="it_checkout.html">Checkout</a></li>-->
                   </ul>
                 </li>
                 <li> <a href="it_contact.html">Contact</a>
                   <ul>
-                    <li><a href="it_contact.html">Contact Page 1</a></li>
-                    <li><a href="it_contact_2.html">Contact Page 2</a></li>
+<!--                    <li><a href="it_contact.html">Contact Page 1</a></li>-->
+                    <li><a href="it_contact_2.html">Contact Page</a></li>
                   </ul>
                 </li>
               </ul>
@@ -299,9 +301,9 @@
         <div class="row">
           <div class="col-md-6">
             <div class="main-heading left_text">
-              <h2>It Next Theme</h2>
+              <h2>It Next Team</h2>
             </div>
-            <p>Tincidunt elit magnis nulla facilisis. Dolor sagittis maecenas. Sapien nunc amet ultrices, dolores sit ipsum velit purus aliquet, massa fringilla leo orci.</p>
+            <p>We are the best Team in the world.</p>
             <ul class="social_icons">
               <li class="social-icon fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
               <li class="social-icon tw"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -313,10 +315,8 @@
               <h2>Additional links</h2>
             </div>
             <ul class="footer-menu">
-              <li><a href="it_about.html"><i class="fa fa-angle-right"></i> About us</a></li>
-              <li><a href="it_term_condition.html"><i class="fa fa-angle-right"></i> Terms and conditions</a></li>
+              <li><a href="{%url 'service'%}"><i class="fa fa-angle-right"></i> About us</a></li>
               <li><a href="it_privacy_policy.html"><i class="fa fa-angle-right"></i> Privacy policy</a></li>
-              <li><a href="it_news.html"><i class="fa fa-angle-right"></i> News</a></li>
               <li><a href="it_contact.html"><i class="fa fa-angle-right"></i> Contact us</a></li>
             </ul>
           </div>
@@ -325,13 +325,12 @@
               <h2>Services</h2>
             </div>
             <ul class="footer-menu">
-              <li><a href="it_data_recovery.html"><i class="fa fa-angle-right"></i> Data recovery</a></li>
-              <li><a href="it_computer_repair.html"><i class="fa fa-angle-right"></i> Computer repair</a></li>
-              <li><a href="it_mobile_service.html"><i class="fa fa-angle-right"></i> Mobile service</a></li>
-              <li><a href="it_network_solution.html"><i class="fa fa-angle-right"></i> Network solutions</a></li>
-              <li><a href="it_techn_support.html"><i class="fa fa-angle-right"></i> Technical support</a></li>
+              {%for s in services%}
+              <li><a href="/service/{{s.id}}"><i class="fa fa-angle-right"></i> {{s.name}}</a></li>
+             {%endfor%}
             </ul>
           </div>
+
           <div class="col-md-6">
             <div class="main-heading left_text">
               <h2>Contact us</h2>
@@ -489,7 +488,7 @@
          }
       </script>
 <!-- google map js -->
-<script src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap' %}"></script>
+<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap'></script>
 <!-- end google map js -->
 </body>
 </html>

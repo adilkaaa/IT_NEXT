@@ -1,20 +1,45 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
+from django.urls import reverse
+
+
+class Category(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('category', kwargs={"slug": self.slug})
+
+
+
+class Tag(models.Model):
+    tag = models.CharField(max_length=50, blank=True)
+    slug = models.SlugField(max_length=50, verbose_name='Url', unique=True)
+
+    def __str__(self):
+        return self.tag
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={"slug": self.slug})
 
 
 class Blog(models.Model):
     TOPICS = (('Marketting', 'Marketting'), ('Economics', 'Economics'))
-    # TAGS = ()
+    # author = models.ForeignKey(User, on_delete= models.CASCADE)
     image = models.ImageField(upload_to='image/blogs/', blank=True)
     title = models.CharField(max_length=100, blank=True)
     topic = models.CharField(max_length=100, choices=TOPICS, blank=True)
-    # comments = models.ForeignKey()
     date = models.DateTimeField(auto_now_add=True)
     content = models.TextField(blank=True)
+    views = models.IntegerField(default=0, verbose_name='Кол-во просмотров')
+    tags = models.ManyToManyField(Tag,blank=True ,related_name='blogs')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='blogs')
 
-    # tags = models.CharField(max_length=100, choices=TAGS)
 
     def __str__(self):
         return self.title
@@ -27,6 +52,8 @@ class Product(models.Model):
     description = models.TextField(blank=True)
 
     # review = models.ManyToOneRel()
+    def get_absolute_url(self):
+        return self.pk #"", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
@@ -36,6 +63,7 @@ class Service(models.Model):
     image = models.ImageField(upload_to='image/services/')
     name = models.CharField(max_length=50, blank=True)
     description = models.TextField(blank=True)
+    orders = models.IntegerField(default=0,verbose_name='order')
 
     def __str__(self):
         return self.name
@@ -60,14 +88,8 @@ class Contact(models.Model):
         return self.name
 
 
-class Category(models.Model):
-    pass
 
 
-# class Comment(models.Model):
-#     name = models.CharField(max_length=100, blank=True)
-#     date = models.DateTimeField(auto_now_add=True)
-#     comment = models.TextField(blank=True)
 
 class Advert(models.Model):
     image = models.ImageField(upload_to='ads/')
@@ -86,4 +108,20 @@ class PostComment(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Email(models.Model):
+    email = models.EmailField(blank=True)
+
+    def __str__(self):
+        return self.email
+
+
+class Data(models.Model):
+    CHOICES = [('Happy Customers','Happy Customers'),('Repaired Laptops','Repaired Laptops'),('Repaired Computers','Repaired Computers'),('OS INSTALLED','OS INSTALLED')]
+    name = models.CharField(blank=True, max_length=100, choices=CHOICES)
+    quantity = models.IntegerField(blank=True)
+    logo = models.FileField(upload_to='logo/')
+    def __str__(self):
+        return self.name
 

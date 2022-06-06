@@ -12,7 +12,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Services</h1>
               <ol class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{%url 'index'%}">Home</a></li>
                 <li class="active">Services</li>
               </ol>
             </div>
@@ -108,8 +108,8 @@
           <div class="service_img"> <img class="img-responsive" src="{{s.image.url}}" alt="#" /> </div>
           <div class="service_cont">
             <h3 class="service_head">{{s.name}}</h3>
-            <p>{{s.description}}</p>
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="it_service_detail.html">View Service</a> </div>
+            <p><span><b>Orders: {{s.orders}}</b></span> <br>{{s.description|truncatechars:40}}</p>
+            <div class="bt_cont"> <a class="btn sqaure_bt" href="/service/{{s.id}}">View Service</a> </div>
           </div>
         </div>
       </div>
